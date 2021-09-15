@@ -14,16 +14,16 @@
 
 use core::fmt::Debug;
 
+use subtle::Choice;
 use subtle::ConditionallyNegatable;
 use subtle::ConditionallySelectable;
 use subtle::ConstantTimeEq;
-use subtle::Choice;
 
 use traits::Identity;
 
-use edwards::EdwardsPoint;
-use backend::serial::curve_models::ProjectiveNielsPoint;
 use backend::serial::curve_models::AffineNielsPoint;
+use backend::serial::curve_models::ProjectiveNielsPoint;
+use edwards::EdwardsPoint;
 
 use zeroize::Zeroize;
 
@@ -107,7 +107,7 @@ impl<'a> From<&'a EdwardsPoint> for LookupTable<AffineNielsPoint> {
 
 impl<T> Zeroize for LookupTable<T>
 where
-    T: Copy + Default + Zeroize
+    T: Copy + Default + Zeroize,
 {
     fn zeroize(&mut self) {
         self.0.zeroize();
